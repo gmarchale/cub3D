@@ -87,9 +87,8 @@ int	check_char_map(char **map, t_player *player)
 				map[x][y] = '2';
 			else if (check_char(map[x][y]) == 3)
 			{
-				player->mat_position.axis[0] = y;
-				player->mat_position.axis[1] = x;
 				player->direction = map[x][y];
+				init_player(player, x, y);
 				map[x][y] = '0';
 				spawn += 1;
 			}

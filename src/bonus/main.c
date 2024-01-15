@@ -3,15 +3,32 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
+/*   By: jdagoy <jdagoy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/17 22:33:41 by jdagoy            #+#    #+#             */
-/*   Updated: 2024/01/14 21:32:40 by jdagoy           ###   ########.fr       */
+/*   Updated: 2024/01/15 12:58:56 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
+void print_map(char **map)
+{
+	int i, j;
+	i = 0;
+
+	while (map[i])
+	{
+		j = 0;
+		while (map[i][j])
+		{
+			printf("%c", map[i][j]);
+			j++;
+		}
+		printf("\n");
+		i++;
+	}
+}
 int	main(int argc, char **argv)
 {
 	t_game			game;

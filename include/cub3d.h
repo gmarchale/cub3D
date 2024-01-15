@@ -80,7 +80,7 @@ void	get_textures(t_game *game);
 
 // init_player.c
 void		update_player_front(t_player *player);
-void		init_player(t_game *game);
+void		init_player(t_player *player, int x, int y);
 
 // set_color.c
 void		set_color(char *buffer, int endian, int color, int alpha);

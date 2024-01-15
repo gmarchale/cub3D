@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_player.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
+/*   By: jdagoy <jdagoy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 14:24:11 by jdagoy            #+#    #+#             */
-/*   Updated: 2024/01/08 23:47:00 by jdagoy           ###   ########.fr       */
+/*   Updated: 2024/01/15 12:38:55 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,18 @@ void	update_player_front(t_player *player)
 	player->front.dir[Y] = (sin(player->angle) * 20) * -1;
 }
 
-void	init_player(t_game *game)
+void	init_player(t_player *player, int x, int y)
 {
-	game->player.position = create_point((WIN_WIDTH / 2), \
-											WIN_HEIGHT / 2);
-	game->player.array_x = game->map_width / 2;
-	game->player.array_y = game->map_height / 2; 
-	game->player.angle = M_PI;
-	update_player_front(&game->player);
+	player->position = create_point(x, y);
+	player->array_x = x;
+	player->array_y = y;
+	if (player->direction == 'N')
+		player->angle = M_PI_3;
+	else if (player->direction == 'S')
+		player->angle = M_PI_2;
+	else if (player->direction == 'W')
+		player->angle = M_PI;
+	else
+		player->angle = 2 * M_PI;
+	update_player_front(player);
 }
