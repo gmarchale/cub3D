@@ -83,16 +83,16 @@ static void	assign_texture(t_texture *texture, char *direction, char *path)
 {
 	if (ft_strncmp(direction, "NO", ft_strlen(direction)) == 0)
 		if (!(check_texture(texture->north, path)))
-			texture->north = ft_strtrim(path, "\n");
+			texture->north = ft_strjoin("./texture/", ft_strtrim(path, "\n"));
 	if (ft_strncmp(direction, "SO", ft_strlen(direction)) == 0)
 		if (!(check_texture(texture->south, path)))
-			texture->south = ft_strtrim(path, "\n");
+			texture->south = ft_strjoin("./texture/", ft_strtrim(path, "\n"));
 	if (ft_strncmp(direction, "WE", ft_strlen(direction)) == 0)
 		if (!(check_texture(texture->west, path)))
-			texture->west = ft_strtrim(path, "\n");
+			texture->west = ft_strjoin("./texture/", ft_strtrim(path, "\n"));
 	if (ft_strncmp(direction, "EA", ft_strlen(direction)) == 0)
 		if (!(check_texture(texture->east, path)))
-			texture->east = ft_strtrim(path, "\n");
+			texture->east = ft_strjoin("./texture/", ft_strtrim(path, "\n"));
 	if (ft_strncmp(direction, "F", ft_strlen(direction)) == 0)
 	{
 		if (!(check_color(texture->floor)))

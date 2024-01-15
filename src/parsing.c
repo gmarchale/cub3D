@@ -107,10 +107,8 @@ int	check_char_map(char **map, t_player *player)
 
 static void	get_data(t_game *game)
 {
-	int		i;
 	char	*line;
 
-	i = 0;
 	line = get_next_line(game->fd);
 	while (line && !check_all_textures(&game->texture))
 	{
