@@ -3,22 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   mlx_init.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdagoy <jdagoy@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/17 20:57:26 by jdagoy            #+#    #+#             */
-/*   Updated: 2024/01/15 10:26:17 by jdagoy           ###   ########.fr       */
+/*   Updated: 2023/12/18 00:39:13 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	init_mlx(t_display *mlx)
+void	init_mlx(t_display *display, t_image_data *img)
 {
-	mlx->mlx = mlx_init();
-	if (mlx->mlx == NULL)
+	display->mlx = mlx_init();
+	if (display->mlx != 0)
 		exit (1);
-	mlx->window = mlx_new_window(mlx->mlx, WIN_WIDTH, WIN_HEIGHT, "Cub3D");
-	mlx->img.img = mlx_new_image(mlx->mlx, WIN_WIDTH, WIN_HEIGHT);
-	mlx->img.address = mlx_get_data_addr(mlx->img.img,
-			&mlx->img.bits_per_pixel, &mlx->img.line_length, &mlx->img.endian);
+	display->window = mlx_new_window(display->mlx, WIN_WIDTH, \
+										WIN_HEIGHT, "Cub3D");
+	display->img.img = mlx_new_image(display->mlx, WIN_WIDTH, WIN_HEIGHT);
+	img->address = mlx_get_data_addr(display->img.img,
+			&img->bits_per_pixel, &img->line_length, &img->endian);
 }

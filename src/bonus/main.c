@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdagoy <jdagoy@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jdagoy <jdagoy@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/17 22:33:41 by jdagoy            #+#    #+#             */
-/*   Updated: 2024/01/15 10:53:15 by jdagoy           ###   ########.fr       */
+/*   Updated: 2024/01/14 21:32:40 by jdagoy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 int	main(int argc, char **argv)
 {
 	t_game			game;
+	t_display		mlx;
 	char			*testmap[] = {
         "111111111111111",
         "100000000000101",
@@ -28,6 +29,7 @@ int	main(int argc, char **argv)
         "100000000000001",
         "111111111111111"
     };
+	t_texture		texture;
 
 	(void)argc;
 	(void)argv;
@@ -36,12 +38,25 @@ int	main(int argc, char **argv)
 	game.map_width = 15;
 	game.floor_color = 0x6F8FAF;
 	game.ceiling_color = 0x0000FF;
-	init_mlx(&game.display);
-	get_textures(&game);
+	mlx.mlx = mlx_init();
+	mlx.window = mlx_new_window(mlx.mlx, WIN_WIDTH, \
+				WIN_HEIGHT, "cub3D");
+	mlx.img.img = mlx_new_image(mlx.mlx, WIN_WIDTH, WIN_HEIGHT);
+	mlx.img.address = mlx_get_data_addr(mlx.img.img,
+			&mlx.img.bits_per_pixel, &mlx.img.line_length, &mlx.img.endian);
+	game.display = mlx;
+	texture.north = "./texture/brick_red.xpm";
+	texture.south = "./texture/test.xpm";
+	texture.east = "./texture/brick_gray.xpm";
+	texture.west = "./texture/brick_graymoss.xpm";
+	read_textures(&game, &mlx, texture.north, "NORTH");
+	read_textures(&game, &mlx, texture.south, "SOUTH");
+	read_textures(&game, &mlx, texture.east, "EAST");
+	read_textures(&game, &mlx, texture.west, "WEST");
 	init_player(&game);
 	mlx_hook(game.display.window, ON_KEYDOWN, 1L << 0, keybindings, &game);
-	mlx_hook(game.display.window, ON_DESTROY, 1L << 0, close_window_cross, &game.display);
+	mlx_hook(game.display.window, ON_DESTROY, 1L << 0, close_window_cross, &mlx);
 	mlx_loop_hook(game.display.mlx, &draw_map, &game);
-	mlx_loop(game.display.mlx);
+	mlx_loop(mlx.mlx);
 	return (0);
 }
